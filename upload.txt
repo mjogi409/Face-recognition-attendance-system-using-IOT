@@ -1,0 +1,33 @@
+#define trigpin 8
+#define echopin 9
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(trigpin, OUTPUT);
+  pinMode(echopin, INPUT);
+  pinMode(13, OUTPUT);
+ }
+
+ void loop() {
+
+  digitalWrite(trigpin ,LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigpin ,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigpin ,LOW);
+  
+  int duration = pulseIn (echopin,HIGH);
+  int distance = (duration/2)/29.1;
+  if(distance < 10)
+  {
+    digitalWrite(13, LOW);
+  }
+  else
+  {
+    digitalWrite(13,HIGH);
+  }
+  Serial.print(distance);
+  
+  Serial.println(" cm");
+  delay(500);
+  }
